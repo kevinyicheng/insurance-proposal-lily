@@ -128,75 +128,83 @@ body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-
 .cost-table tbody tr:hover{background:#e8e2d6;}
 .cost-table .age-milestone td:first-child{color:#7F77DD;font-weight:700;}
 .cost-table .age-milestone{background:#ede8de;}
+.cost-table th.col-total,.cost-table td.col-total{border-right:2px solid #c8c0ad;padding-right:12px;}
+.cost-table th:nth-child(3),.cost-table td:nth-child(3){padding-left:12px;}
 .col-total{font-weight:700;color:#2a6496 !important;}
 .col-cum{color:#5a5a5a !important;}
 .no-prem{color:#bbb !important;font-weight:400 !important;}
 .cost-foot td{background:#ddd8c9;font-weight:700;padding:7px 8px;border-top:2px solid #c8c0ad;}
 .cost-note{font-size:0.68em;color:var(--text-tertiary);line-height:1.6;margin-top:10px;}
 
-/* 醫療雙十字 */
-.cross-section{margin-top:1.75rem;border:1px solid var(--border-secondary);border-radius:var(--radius-lg);padding:20px 18px 16px;background:var(--bg-cream);}
-.cross-title{font-size:0.88em;font-weight:500;color:var(--text-primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+/* 醫療雙十字 — 7 列 grid 版本 */
+/* 尺寸：col1 badge 76 | col2 line 85 | col3 arrow 10 | col4 core 88 | col5 arrow 10 | col6 line 85 | col7 badge 76 → 總寬 430 */
+.cross-section{margin-top:1.75rem;border:1px solid var(--border-secondary);border-radius:var(--radius-lg);padding:24px 20px 18px;background:var(--bg-cream);overflow:visible;}
+.cross-title{font-size:0.88em;font-weight:500;color:var(--text-primary);display:flex;align-items:center;gap:7px;margin-bottom:20px;}
 .cross-title i{color:var(--text-secondary);}
-/* 雙十字：5-row × 3-col grid，三圓同一水平基準 */
-/* 關鍵尺寸：badge 76px (半徑 38) · line 70px · 箭頭三角 10px (半徑 5) */
-/* badge 中心距欄左緣／右緣 = 38 + 線 70 + 三角寬 8 = 116px */
 .cross-diagram{
   display:grid;
-  grid-template-columns:minmax(280px,400px) auto minmax(240px,320px);
+  grid-template-columns:76px 85px 10px 88px 10px 85px 76px;
   grid-template-rows:auto auto auto auto auto;
-  align-items:stretch;
-  gap:0;
+  justify-content:center;
   margin:0 auto;
   width:fit-content;
-  max-width:100%;
+  row-gap:0;
+  column-gap:0;
 }
-/* row 定位 */
-.cd-top-l   {grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-end;padding-bottom:6px;}
-.cd-top-r   {grid-column:3;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;padding-bottom:6px;}
-.cd-arr-up-l{grid-column:1;grid-row:2;display:flex;flex-direction:column;align-items:flex-end;padding-right:111px;}
-.cd-arr-up-r{grid-column:3;grid-row:2;display:flex;flex-direction:column;align-items:flex-start;padding-left:111px;}
-.cd-mid-l   {grid-column:1;grid-row:3;display:flex;align-items:center;justify-content:flex-end;}
-.cd-core    {grid-column:2;grid-row:3;display:flex;align-items:center;}
-.cd-mid-r   {grid-column:3;grid-row:3;display:flex;align-items:center;justify-content:flex-start;}
-.cd-arr-dn-l{grid-column:1;grid-row:4;display:flex;flex-direction:column;align-items:flex-end;padding-right:111px;}
-.cd-arr-dn-r{grid-column:3;grid-row:4;display:flex;flex-direction:column;align-items:flex-start;padding-left:111px;}
-.cd-bot-l   {grid-column:1;grid-row:5;display:flex;flex-direction:column;align-items:flex-end;padding-top:6px;}
-.cd-bot-r   {grid-column:3;grid-row:5;display:flex;flex-direction:column;align-items:flex-start;padding-top:6px;}
-/* 中間行：水平線＋節點圓＋箭頭，三件一起對齊圓心 */
-.cd-mid-l,.cd-mid-r{gap:0;}
-/* 水平線（固定寬度，讓 badge 位置穩定）*/
-.cross-h-line-l{width:70px;height:2px;background:linear-gradient(to left,#c8c0ad,#d4537e);flex-shrink:0;}
-.cross-h-line-r{width:70px;height:2px;background:linear-gradient(to right,#c8c0ad,#5a9e3a);flex-shrink:0;}
-/* 箭頭三角 */
+/* 所有欄位元素都以 col1/col7 中心為軸對齊 */
+.cd-top-l{grid-column:1;grid-row:1;justify-self:center;padding-bottom:12px;}
+.cd-top-r{grid-column:7;grid-row:1;justify-self:center;padding-bottom:12px;}
+.cd-arr-up-l{grid-column:1;grid-row:2;justify-self:center;display:flex;flex-direction:column;align-items:center;}
+.cd-arr-up-r{grid-column:7;grid-row:2;justify-self:center;display:flex;flex-direction:column;align-items:center;}
+.cd-mid-l{grid-column:1 / 4;grid-row:3;display:flex;align-items:center;justify-content:flex-start;}
+.cd-core{grid-column:4;grid-row:3;display:flex;align-items:center;justify-content:center;}
+.cd-mid-r{grid-column:5 / 8;grid-row:3;display:flex;align-items:center;justify-content:flex-end;}
+.cd-arr-dn-l{grid-column:1;grid-row:4;justify-self:center;display:flex;flex-direction:column;align-items:center;}
+.cd-arr-dn-r{grid-column:7;grid-row:4;justify-self:center;display:flex;flex-direction:column;align-items:center;}
+.cd-bot-l{grid-column:1;grid-row:5;justify-self:center;padding-top:12px;}
+.cd-bot-r{grid-column:7;grid-row:5;justify-self:center;padding-top:12px;}
+/* 水平線（固定寬度 85px）+ 箭頭三角 */
+.cross-h-line-l{width:85px;height:2px;background:linear-gradient(to left,#c8c0ad,#d4537e);flex-shrink:0;}
+.cross-h-line-r{width:85px;height:2px;background:linear-gradient(to right,#c8c0ad,#5a9e3a);flex-shrink:0;}
 .cross-arr-l{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:8px solid #d4537e;flex-shrink:0;}
 .cross-arr-r{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #5a9e3a;flex-shrink:0;}
 /* 中心壽險圓 */
-.cross-core-circle{width:88px;height:88px;border-radius:50%;background:#ECE7D8;border:2px solid #c8c0ad;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0;}
+.cross-core-circle{width:88px;height:88px;border-radius:50%;background:#ECE7D8;border:2px solid #c8c0ad;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
 .cross-core-label{font-size:0.62em;font-weight:600;color:#56544f;line-height:1.3;}
 .cross-core-amt{font-size:0.72em;font-weight:700;color:#1f1e1c;margin-top:2px;}
 /* 側邊節點圓 */
 .cross-node-circle{width:76px;height:76px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0;}
 .cross-node-green{background:rgba(90,158,58,0.13);border:2px solid rgba(90,158,58,0.45);}
-.cross-node-pink {background:rgba(212,83,126,0.12);border:2px solid rgba(212,83,126,0.40);}
-.cross-node-label{font-size:0.65em;font-weight:700;line-height:1.25;}
+.cross-node-pink{background:rgba(212,83,126,0.12);border:2px solid rgba(212,83,126,0.40);}
+.cross-node-label{font-size:0.70em;font-weight:700;line-height:1.25;}
 .cross-node-green .cross-node-label{color:#3a7a10;}
-.cross-node-pink  .cross-node-label{color:#a0304e;}
-.cross-node-sub{font-size:0.55em;color:var(--text-tertiary);margin-top:1px;}
-/* 垂直連接線 */
+.cross-node-pink .cross-node-label{color:#a0304e;}
+.cross-node-sub{font-size:0.56em;color:var(--text-tertiary);margin-top:2px;}
+/* 垂直連接線 + 上下三角 */
 .cross-v-line{width:2px;background:#c8c0ad;margin:0 auto;}
 .cross-arr-u::before{content:'';display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid #aaa;margin:0 auto;}
-.cross-arr-d::after {content:'';display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #aaa;margin:0 auto;}
-/* 保障卡片 */
-.cross-card{background:var(--bg-primary);border:1px solid var(--border-tertiary);border-radius:8px;padding:9px 11px;width:100%;font-size:0.70em;line-height:1.5;}
-.cross-card-title{font-weight:600;font-size:0.9em;margin-bottom:5px;}
-.cross-card-row{display:flex;justify-content:space-between;align-items:baseline;gap:6px;padding:2px 0;border-bottom:1px solid var(--border-tertiary);}
-.cross-card-row:last-child{border-bottom:none;}
+.cross-arr-d::after{content:'';display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #aaa;margin:0 auto;}
+/* 保障卡片 — 統一樣式 */
+.cross-card{background:var(--bg-primary);border:1px solid var(--border-tertiary);border-radius:8px;padding:11px 13px;font-size:0.72em;line-height:1.55;}
+.cross-card-title{font-weight:600;font-size:0.92em;margin-bottom:7px;letter-spacing:0.03em;text-align:center;padding-bottom:5px;border-bottom:1px solid var(--border-tertiary);}
+.cross-card-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:3px 0;}
+.cross-card-row + .cross-card-row{border-top:1px dashed var(--border-tertiary);}
 .cross-card-name{color:var(--text-secondary);flex:1;}
 .cross-card-val{font-weight:600;color:var(--text-primary);white-space:nowrap;}
 .cross-card-val.green{color:#3a7a10;}
 .cross-card-val.pink{color:#a0304e;}
-.cross-note{font-size:0.68em;color:var(--text-tertiary);line-height:1.6;margin-top:12px;}
+.cross-card-val.purple{color:#6a4a9e;}
+/* 住院保障大卡 — 內含「定額給付｜實支實付」兩欄 */
+.cross-bigcard{width:380px;background:var(--bg-primary);border:1px solid var(--border-tertiary);border-radius:10px;padding:13px 16px 12px;font-size:0.72em;line-height:1.55;box-shadow:0 1px 3px rgba(0,0,0,0.03);}
+.cross-bigcard-title{font-weight:600;font-size:0.95em;margin-bottom:10px;letter-spacing:0.04em;text-align:center;padding-bottom:6px;border-bottom:1px solid var(--border-tertiary);color:#a0304e;}
+.cross-bigcard-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+.cross-bigcard-col{display:flex;flex-direction:column;}
+.cross-bigcard-col + .cross-bigcard-col{border-left:1px dashed var(--border-tertiary);padding-left:14px;}
+.cross-subtitle{font-weight:600;font-size:0.9em;color:#a0304e;margin-bottom:5px;padding-bottom:3px;}
+/* 下方卡片／右上小卡 的寬度 */
+.cross-smallcard-top{width:200px;}
+.cross-smallcard-bot{width:220px;}
+.cross-note{font-size:0.68em;color:var(--text-tertiary);line-height:1.6;margin-top:14px;}
 
 @media print{
   @page{size:A4;margin:16mm 14mm;}
@@ -273,7 +281,7 @@ body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-
           <span class="chev"><i class="ti ti-chevron-down"></i></span>
         </summary>
         <div class="premium-detail">
-          <div class="d-row"><span class="d-label">重大疾病</span><span class="d-val"><span class="hl-y">1,000,000 元</span>（心肌梗塞重度、冠狀動脈繞道手術等）</span></div>
+          <div class="d-row"><span class="d-label">重大疾病</span><span class="d-val">第1年 100,000／第2年起 <span class="hl-y">1,000,000 元</span>（心肌梗塞重度等）</span></div>
           <div class="d-row"><span class="d-label">首年癌症（重度）</span><span class="d-val">100,000 元</span></div>
           <div class="d-row"><span class="d-label">特定傷病</span><span class="d-val">1,000,000 元</span></div>
         </div>
@@ -405,7 +413,7 @@ body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-
             <div class="product-top"><div class="product-name">UCR 醫樣安心重大疾病附約</div><div class="product-badge">重大疾病</div></div>
             <div class="product-headline">保額 100 萬，涵蓋急性心肌梗塞重度、冠狀動脈繞道手術等重大疾病</div>
             <div class="benefits">
-              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">重大疾病保險金</span></span><span class="benefit-val"><span class="hl">1,000,000 元</span>（非首年癌症重度）</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">重大疾病保險金</span></span><span class="benefit-val">第1年 <span class="hl">100,000</span>／第2年起 <span class="hl">1,000,000 元</span>（心肌梗塞重度等）</span></div>
               <div class="benefit-row"><span class="benefit-label">首年癌症（重度）</span><span class="benefit-val">確診當年度保費的 <span class="hl">10%</span>（約 100,000 元）</span></div>
               <div class="benefit-row"><span class="benefit-label">特定傷病</span><span class="benefit-val"><span class="hl">1,000,000 元</span></span></div>
             </div>
@@ -535,6 +543,149 @@ body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-
     </div>
   </div>
 
+  <!-- 醫療雙十字 -->
+  <div class="cross-section">
+    <div class="cross-title"><i class="ti ti-vector-triangle"></i> 醫療雙十字保障示意</div>
+
+    <div class="cross-diagram">
+
+      <!-- row1 左：住院保障大卡（定額 ｜ 實支 兩欄）-->
+      <div class="cd-top-l">
+        <div class="cross-bigcard">
+          <div class="cross-bigcard-title">住院保障</div>
+          <div class="cross-bigcard-grid">
+            <div class="cross-bigcard-col">
+              <div class="cross-subtitle">定額給付</div>
+              <div class="cross-card-row">
+                <span class="cross-card-name">一般住院日額</span>
+                <span class="cross-card-val pink">2,000 / 日</span>
+              </div>
+              <div class="cross-card-row">
+                <span class="cross-card-name">住院手術金</span>
+                <span class="cross-card-val pink">35,000 × 比例%</span>
+              </div>
+            </div>
+            <div class="cross-bigcard-col">
+              <div class="cross-subtitle">實支實付</div>
+              <div class="cross-card-row">
+                <span class="cross-card-name">病房費</span>
+                <span class="cross-card-val pink">3,000 / 日</span>
+              </div>
+              <div class="cross-card-row">
+                <span class="cross-card-name">住院自費</span>
+                <span class="cross-card-val pink">30 萬 / 次</span>
+              </div>
+              <div class="cross-card-row">
+                <span class="cross-card-name">門診手術</span>
+                <span class="cross-card-val pink">25,000 / 次</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- row1 右：意外醫療小卡 -->
+      <div class="cd-top-r">
+        <div class="cross-card cross-smallcard-top">
+          <div class="cross-card-title" style="color:#3a7a10;">意外醫療</div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">意外實支上限</span>
+            <span class="cross-card-val green">10 萬 / 次</span>
+          </div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">意外住院</span>
+            <span class="cross-card-val green">2,000 / 日</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- row2 左：上箭頭 -->
+      <div class="cd-arr-up-l">
+        <div class="cross-arr-u"></div>
+        <div class="cross-v-line" style="height:14px;"></div>
+      </div>
+
+      <!-- row2 右：上箭頭 -->
+      <div class="cd-arr-up-r">
+        <div class="cross-arr-u"></div>
+        <div class="cross-v-line" style="height:14px;"></div>
+      </div>
+
+      <!-- row3 左：住院節點 + 線 + 箭頭 -->
+      <div class="cd-mid-l">
+        <div class="cross-node-circle cross-node-pink">
+          <div class="cross-node-label">住院</div>
+          <div class="cross-node-sub">疾病／意外</div>
+        </div>
+        <div class="cross-h-line-l"></div>
+        <div class="cross-arr-l"></div>
+      </div>
+
+      <!-- row3 中：壽險主約圓 -->
+      <div class="cd-core">
+        <div class="cross-core-circle">
+          <span class="cross-core-label">壽險主約</span>
+          <span class="cross-core-amt">XWS5</span>
+          <span style="font-size:0.58em;color:#8a8780;margin-top:1px;">5 萬保額</span>
+        </div>
+      </div>
+
+      <!-- row3 右：箭頭 + 線 + 意外節點 -->
+      <div class="cd-mid-r">
+        <div class="cross-arr-r"></div>
+        <div class="cross-h-line-r"></div>
+        <div class="cross-node-circle cross-node-green">
+          <div class="cross-node-label">意外</div>
+          <div class="cross-node-sub">ADG／ADM</div>
+        </div>
+      </div>
+
+      <!-- row4 左：下箭頭 -->
+      <div class="cd-arr-dn-l">
+        <div class="cross-v-line" style="height:14px;"></div>
+        <div class="cross-arr-d"></div>
+      </div>
+
+      <!-- row4 右：下箭頭 -->
+      <div class="cd-arr-dn-r">
+        <div class="cross-v-line" style="height:14px;"></div>
+        <div class="cross-arr-d"></div>
+      </div>
+
+      <!-- row5 左：重大傷病／疾病卡 -->
+      <div class="cd-bot-l">
+        <div class="cross-card cross-smallcard-bot">
+          <div class="cross-card-title" style="color:#6a4a9e;">重大傷病／疾病</div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">SDL 重傷病（第2年起）</span>
+            <span class="cross-card-val purple">50 萬 / 年</span>
+          </div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">UCR 重大疾病（第2年起）</span>
+            <span class="cross-card-val purple">100 萬 / 次</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- row5 右：意外失能卡 -->
+      <div class="cd-bot-r">
+        <div class="cross-card cross-smallcard-bot">
+          <div class="cross-card-title" style="color:#3a7a10;">意外身故／失能</div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">意外失能</span>
+            <span class="cross-card-val green">100 萬 × 比例</span>
+          </div>
+          <div class="cross-card-row">
+            <span class="cross-card-name">重大燒燙傷</span>
+            <span class="cross-card-val green">40 萬</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
   <!-- 50年保費試算表 -->
   <div class="cost-section">
     <div class="cost-header">
@@ -545,60 +696,60 @@ body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-
       <table class="cost-table">
         <thead>
           <tr>
-            <th>年齡</th><th>XWS5</th><th>ADG</th><th>ADM</th><th>TMR</th><th>SDL</th><th>HKR5</th><th>HSV1</th><th>HSY1</th><th>UCR</th><th class="col-total">年繳合計</th>
+            <th>年齡</th><th class="col-total">年繳合計</th><th>XWS5</th><th>ADG</th><th>ADM</th><th>TMR</th><th>SDL</th><th>HKR5</th><th>HSV1</th><th>HSY1</th><th>UCR</th>
           </tr>
         </thead>
         <tbody>
-<tr><td>0</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>230</td><td>6,770</td><td>3,070</td><td>3,694</td><td>360</td><td class="col-total">18,429</td></tr>
-<tr><td>1</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>2,045</td><td>6,770</td><td>3,070</td><td>3,694</td><td>600</td><td class="col-total">20,484</td></tr>
-<tr><td>2</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,540</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,879</td></tr>
-<tr><td>3</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,844</td></tr>
-<tr><td>4</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,490</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,829</td></tr>
-<tr><td>5</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,045</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td><td class="col-total">18,129</td></tr>
-<tr><td>6</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>900</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,884</td></tr>
-<tr><td>7</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>755</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,739</td></tr>
-<tr><td>8</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>585</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,569</td></tr>
-<tr><td>9</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>605</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td><td class="col-total">17,689</td></tr>
-<tr><td>10</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>620</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,255</td></tr>
-<tr><td>11</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>680</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,315</td></tr>
-<tr><td>12</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>665</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,300</td></tr>
-<tr><td>13</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>730</td><td>6,770</td><td>2,970</td><td>3,090</td><td>600</td><td class="col-total">18,465</td></tr>
-<tr><td>14</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>850</td><td>6,770</td><td>2,970</td><td>3,090</td><td>700</td><td class="col-total">18,685</td></tr>
-<tr class="age-milestone"><td>15</td><td>990</td><td>650</td><td>1,060</td><td>1,935</td><td>995</td><td>6,770</td><td>3,080</td><td>3,210</td><td>800</td><td class="col-total">19,490</td></tr>
-<tr><td>16</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,175</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,100</td></tr>
-<tr><td>17</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,295</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,220</td></tr>
-<tr><td>18</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,430</td></tr>
-<tr><td>19</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,695</td><td>6,770</td><td>3,080</td><td>3,210</td><td>1,000</td><td class="col-total">20,720</td></tr>
-<tr class="age-milestone"><td>20</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,565</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">19,975</td></tr>
-<tr><td>21</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,575</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">19,985</td></tr>
-<tr><td>22</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,635</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">20,045</td></tr>
-<tr><td>23</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,675</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,100</td><td class="col-total">20,185</td></tr>
-<tr><td>24</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,730</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,300</td><td class="col-total">20,440</td></tr>
-<tr><td>25</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,885</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,500</td><td class="col-total">21,350</td></tr>
-<tr><td>26</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,915</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,600</td><td class="col-total">21,480</td></tr>
-<tr><td>27</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,035</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,800</td><td class="col-total">21,800</td></tr>
-<tr><td>28</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,200</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,000</td><td class="col-total">22,165</td></tr>
-<tr><td>29</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,495</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,300</td><td class="col-total">22,760</td></tr>
-<tr class="age-milestone"><td>30</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,780</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,500</td><td class="col-total">28,170</td></tr>
-<tr><td>31</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,975</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,800</td><td class="col-total">28,665</td></tr>
-<tr><td>32</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,260</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,000</td><td class="col-total">29,150</td></tr>
-<tr><td>33</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,315</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,400</td><td class="col-total">29,605</td></tr>
-<tr><td>34</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,480</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,700</td><td class="col-total">30,070</td></tr>
-<tr><td>35</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,765</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,000</td><td class="col-total">31,518</td></tr>
-<tr><td>36</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,940</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,300</td><td class="col-total">31,993</td></tr>
-<tr><td>37</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,185</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,600</td><td class="col-total">32,538</td></tr>
-<tr><td>38</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,755</td><td>6,770</td><td>7,200</td><td>5,808</td><td>5,300</td><td class="col-total">33,808</td></tr>
-<tr><td>39</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,290</td><td>6,770</td><td>7,200</td><td>5,808</td><td>6,000</td><td class="col-total">35,043</td></tr>
-<tr class="age-milestone"><td>40</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,855</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,400</td><td class="col-total">36,776</td></tr>
-<tr><td>41</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>6,410</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,800</td><td class="col-total">37,731</td></tr>
-<tr><td>42</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,005</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,300</td><td class="col-total">38,826</td></tr>
-<tr><td>43</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,395</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,900</td><td class="col-total">39,816</td></tr>
-<tr><td>44</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,845</td><td>6,770</td><td>7,150</td><td>6,626</td><td>8,500</td><td class="col-total">40,866</td></tr>
-<tr class="age-milestone"><td>45</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,290</td><td>6,770</td><td>8,050</td><td>7,455</td><td>9,400</td><td class="col-total">43,940</td></tr>
-<tr><td>46</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,600</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,000</td><td class="col-total">44,850</td></tr>
-<tr><td>47</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,180</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,800</td><td class="col-total">46,230</td></tr>
-<tr><td>48</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,585</td><td>6,770</td><td>8,050</td><td>7,455</td><td>11,500</td><td class="col-total">47,335</td></tr>
-<tr><td>49</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>10,035</td><td>6,770</td><td>8,050</td><td>7,455</td><td>12,100</td><td class="col-total">48,385</td></tr>
+<tr><td>0</td><td class="col-total">18,429</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>230</td><td>6,770</td><td>3,070</td><td>3,694</td><td>360</td></tr>
+<tr><td>1</td><td class="col-total">20,484</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>2,045</td><td>6,770</td><td>3,070</td><td>3,694</td><td>600</td></tr>
+<tr><td>2</td><td class="col-total">19,879</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,540</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td></tr>
+<tr><td>3</td><td class="col-total">19,844</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td></tr>
+<tr><td>4</td><td class="col-total">19,829</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,490</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td></tr>
+<tr><td>5</td><td class="col-total">18,129</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,045</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td></tr>
+<tr><td>6</td><td class="col-total">17,884</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>900</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td></tr>
+<tr><td>7</td><td class="col-total">17,739</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>755</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td></tr>
+<tr><td>8</td><td class="col-total">17,569</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>585</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td></tr>
+<tr><td>9</td><td class="col-total">17,689</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>605</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td></tr>
+<tr><td>10</td><td class="col-total">18,255</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>620</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td></tr>
+<tr><td>11</td><td class="col-total">18,315</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>680</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td></tr>
+<tr><td>12</td><td class="col-total">18,300</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>665</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td></tr>
+<tr><td>13</td><td class="col-total">18,465</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>730</td><td>6,770</td><td>2,970</td><td>3,090</td><td>600</td></tr>
+<tr><td>14</td><td class="col-total">18,685</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>850</td><td>6,770</td><td>2,970</td><td>3,090</td><td>700</td></tr>
+<tr class="age-milestone"><td>15</td><td class="col-total">19,490</td><td>990</td><td>650</td><td>1,060</td><td>1,935</td><td>995</td><td>6,770</td><td>3,080</td><td>3,210</td><td>800</td></tr>
+<tr><td>16</td><td class="col-total">20,100</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,175</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td></tr>
+<tr><td>17</td><td class="col-total">20,220</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,295</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td></tr>
+<tr><td>18</td><td class="col-total">20,430</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td></tr>
+<tr><td>19</td><td class="col-total">20,720</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,695</td><td>6,770</td><td>3,080</td><td>3,210</td><td>1,000</td></tr>
+<tr class="age-milestone"><td>20</td><td class="col-total">19,975</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,565</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td></tr>
+<tr><td>21</td><td class="col-total">19,985</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,575</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td></tr>
+<tr><td>22</td><td class="col-total">20,045</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,635</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td></tr>
+<tr><td>23</td><td class="col-total">20,185</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,675</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,100</td></tr>
+<tr><td>24</td><td class="col-total">20,440</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,730</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,300</td></tr>
+<tr><td>25</td><td class="col-total">21,350</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,885</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,500</td></tr>
+<tr><td>26</td><td class="col-total">21,480</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,915</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,600</td></tr>
+<tr><td>27</td><td class="col-total">21,800</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,035</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,800</td></tr>
+<tr><td>28</td><td class="col-total">22,165</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,200</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,000</td></tr>
+<tr><td>29</td><td class="col-total">22,760</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,495</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,300</td></tr>
+<tr class="age-milestone"><td>30</td><td class="col-total">28,170</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,780</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,500</td></tr>
+<tr><td>31</td><td class="col-total">28,665</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,975</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,800</td></tr>
+<tr><td>32</td><td class="col-total">29,150</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,260</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,000</td></tr>
+<tr><td>33</td><td class="col-total">29,605</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,315</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,400</td></tr>
+<tr><td>34</td><td class="col-total">30,070</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,480</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,700</td></tr>
+<tr><td>35</td><td class="col-total">31,518</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,765</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,000</td></tr>
+<tr><td>36</td><td class="col-total">31,993</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,940</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,300</td></tr>
+<tr><td>37</td><td class="col-total">32,538</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,185</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,600</td></tr>
+<tr><td>38</td><td class="col-total">33,808</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,755</td><td>6,770</td><td>7,200</td><td>5,808</td><td>5,300</td></tr>
+<tr><td>39</td><td class="col-total">35,043</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,290</td><td>6,770</td><td>7,200</td><td>5,808</td><td>6,000</td></tr>
+<tr class="age-milestone"><td>40</td><td class="col-total">36,776</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,855</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,400</td></tr>
+<tr><td>41</td><td class="col-total">37,731</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>6,410</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,800</td></tr>
+<tr><td>42</td><td class="col-total">38,826</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,005</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,300</td></tr>
+<tr><td>43</td><td class="col-total">39,816</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,395</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,900</td></tr>
+<tr><td>44</td><td class="col-total">40,866</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,845</td><td>6,770</td><td>7,150</td><td>6,626</td><td>8,500</td></tr>
+<tr class="age-milestone"><td>45</td><td class="col-total">43,940</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,290</td><td>6,770</td><td>8,050</td><td>7,455</td><td>9,400</td></tr>
+<tr><td>46</td><td class="col-total">44,850</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,600</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,000</td></tr>
+<tr><td>47</td><td class="col-total">46,230</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,180</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,800</td></tr>
+<tr><td>48</td><td class="col-total">47,335</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,585</td><td>6,770</td><td>8,050</td><td>7,455</td><td>11,500</td></tr>
+<tr><td>49</td><td class="col-total">48,385</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>10,035</td><td>6,770</td><td>8,050</td><td>7,455</td><td>12,100</td></tr>
         </tbody>
         <tfoot></tfoot>
       </table>
