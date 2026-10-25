@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保障規劃建議書</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/tabler-icons.min.css">
+<style>
+:root{
+  --bg-primary:#ffffff;--bg-secondary:#f7f6f3;--bg-cream:#ECE7D8;
+  --text-primary:#1f1e1c;--text-secondary:#56544f;--text-tertiary:#8a8780;
+  --border-secondary:#cbc9c1;--border-tertiary:#e6e4dd;
+  --radius-md:8px;--radius-lg:12px;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);-webkit-font-smoothing:antialiased;}
+.wrap{max-width:820px;margin:0 auto;padding:2rem 1.5rem 3rem;font-size:15px;}
+@media(min-width:600px){.wrap{font-size:16px;}}
+@media(min-width:1024px){.wrap{font-size:17px;}}
+
+.header{margin-bottom:1.25rem;}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.doc-label{font-size:0.71em;color:var(--text-tertiary);margin-bottom:4px;}
+.client-name{font-size:1.47em;font-weight:500;color:var(--text-primary);}
+.hdate{font-size:0.76em;color:var(--text-tertiary);margin-top:4px;text-align:right;}
+.header-divider{margin-top:12px;height:1px;background:var(--border-tertiary);}
+
+.premium-section{margin:1.25rem 0 1.75rem;border:1px solid var(--border-tertiary);border-radius:var(--radius-lg);padding:14px 16px;background:var(--bg-cream);}
+.premium-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;}
+.premium-title{font-size:0.71em;font-weight:500;letter-spacing:0.06em;color:#6b6759;}
+.premium-total-inline{display:flex;align-items:baseline;gap:6px;}
+.premium-total-label{font-size:0.76em;color:#56544f;}
+.premium-total-amt{font-size:1.06em;font-weight:500;color:var(--text-primary);}
+.pgroup{margin-bottom:10px;}
+.pgroup:last-of-type{margin-bottom:0;}
+.pgroup-label{font-size:0.65em;font-weight:500;letter-spacing:0.05em;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:5px;}
+.pg-blue .pgroup-label{background:rgba(55,138,221,0.18);color:#185FA5;}
+.pg-purple .pgroup-label{background:rgba(127,119,221,0.18);color:#3C3489;}
+.pg-pink .pgroup-label{background:rgba(212,83,126,0.18);color:#993556;}
+.pg-green .pgroup-label{background:rgba(99,153,34,0.18);color:#3B6D11;}
+.premium-item{border-radius:7px;margin-bottom:4px;overflow:hidden;background:var(--bg-primary);border:1px solid var(--border-tertiary);}
+.premium-item summary{display:flex;align-items:center;gap:8px;padding:8px 12px;cursor:pointer;list-style:none;}
+.premium-item summary::-webkit-details-marker{display:none;}
+.premium-name{font-size:0.78em;color:var(--text-primary);flex:1;}
+.premium-tag{font-size:0.65em;color:var(--text-tertiary);margin-left:6px;}
+.premium-amt{font-size:0.78em;font-weight:500;color:var(--text-primary);}
+.chev{font-size:0.8em;color:var(--text-tertiary);transition:transform 0.2s;display:flex;}
+.premium-item[open] .chev{transform:rotate(180deg);}
+.premium-detail{padding:8px 12px 10px 12px;display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--border-tertiary);margin-top:2px;}
+.d-row{display:flex;align-items:baseline;gap:8px;}
+.d-label{font-size:0.72em;color:var(--text-tertiary);white-space:nowrap;min-width:6em;}
+.d-val{font-size:0.74em;color:var(--text-secondary);line-height:1.5;}
+.premium-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;}
+.legend-item{display:flex;align-items:center;gap:4px;font-size:0.65em;color:#6b6759;}
+.legend-dot{width:9px;height:9px;border-radius:2px;}
+.ld-purple{background:rgba(127,119,221,0.5);}
+.ld-pink{background:rgba(212,83,126,0.5);}
+.ld-green{background:rgba(99,153,34,0.5);}
+.ld-blue{background:rgba(55,138,221,0.5);}
+.premium-sub{font-size:0.65em;color:#6b6759;margin-top:8px;}
+
+.timeline{position:relative;padding-left:30px;}
+.timeline::before{content:'';position:absolute;left:10px;top:6px;bottom:6px;width:1px;background:var(--border-secondary);}
+.section{margin-bottom:2.2rem;}
+.section:last-child{margin-bottom:0;}
+.section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative;}
+.node{position:absolute;left:-30px;width:20px;height:20px;border-radius:50%;border:2px solid;display:flex;align-items:center;justify-content:center;background:var(--bg-primary);}
+.node i{font-size:10px;}
+.branch-wrap{position:relative;padding-left:22px;display:flex;flex-direction:column;gap:10px;}
+.branch-wrap::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:1px;background:var(--border-tertiary);}
+.branch-card{position:relative;}
+.branch-card::before{content:'';position:absolute;left:-22px;top:50%;width:18px;height:1px;background:var(--border-tertiary);}
+.product-card{border:1px solid var(--border-tertiary);border-radius:var(--radius-lg);padding:14px 16px;background:var(--bg-primary);}
+.product-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.product-name{font-size:0.94em;font-weight:500;color:var(--text-primary);}
+.product-badge{font-size:0.71em;padding:3px 9px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+.product-headline{font-size:0.82em;color:var(--text-secondary);margin-bottom:10px;line-height:1.6;}
+.benefits{display:flex;flex-direction:column;gap:6px;}
+.benefit-row{display:flex;align-items:baseline;gap:10px;}
+.benefit-label{font-size:0.76em;color:var(--text-tertiary);white-space:nowrap;min-width:6.5em;}
+.benefit-val{font-size:0.82em;color:var(--text-primary);line-height:1.55;}
+.hl{font-weight:500;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:2px;color:var(--text-primary);}
+.hl-y{background:#fff176;border-radius:2px;padding:0 2px;font-weight:600;color:#333;}
+.sec-before .node{border-color:#7F77DD;color:#7F77DD;}
+.sec-before .phase-tag{border-color:#CECBF6;color:#3C3489;background:#EEEDFE;}
+.sec-before .product-badge{background:#EEEDFE;color:#3C3489;}
+.sec-mid .node{border-color:#E24B4A;color:#E24B4A;}
+.sec-mid .phase-tag{border-color:#F7C1C1;color:#A32D2D;background:#FCEBEB;}
+.sec-mid .product-badge{background:#FCEBEB;color:#A32D2D;}
+.sec-acc .node{border-color:#639922;color:#639922;}
+.sec-acc .phase-tag{border-color:#C0DD97;color:#3B6D11;background:#EAF3DE;}
+.sec-acc .product-badge{background:#EAF3DE;color:#3B6D11;}
+.sec-life .node{border-color:#378ADD;color:#378ADD;}
+.sec-life .phase-tag{border-color:#B5D4F4;color:#185FA5;background:#E6F1FB;}
+.sec-life .product-badge{background:#E6F1FB;color:#185FA5;}
+.phase-tag{font-size:0.71em;font-weight:500;letter-spacing:0.06em;padding:4px 10px;border-radius:4px;border:1px solid;white-space:nowrap;}
+.phase-title{font-size:0.76em;color:var(--text-tertiary);line-height:1.5;}
+
+.summary-section{margin-top:1.75rem;border:1px solid var(--border-secondary);border-radius:var(--radius-lg);padding:16px 18px;background:var(--bg-cream);}
+.summary-title{font-size:0.88em;font-weight:500;color:var(--text-primary);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.summary-title i{color:var(--text-secondary);}
+.summary-list{display:flex;flex-direction:column;gap:8px;}
+.summary-item{display:flex;align-items:baseline;gap:10px;padding:7px 12px;border-radius:8px;background:var(--bg-primary);border:1px solid var(--border-tertiary);}
+.summary-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;position:relative;top:1px;}
+.summary-text{font-size:0.85em;color:var(--text-secondary);flex:1;line-height:1.5;}
+.summary-amt{font-size:0.92em;font-weight:500;color:var(--text-primary);white-space:nowrap;}
+
+.print-bar{display:flex;justify-content:flex-end;margin-top:1.5rem;}
+.print-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;font-size:0.82em;border:1px solid var(--border-secondary);border-radius:var(--radius-md);background:transparent;color:var(--text-primary);cursor:pointer;}
+.print-btn:hover{background:var(--bg-secondary);}
+.footer{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border-tertiary);}
+.footer-note{font-size:0.71em;color:var(--text-tertiary);line-height:1.7;}
+
+/* 50年保費試算表 */
+.cost-section{margin-top:1.75rem;border:1px solid var(--border-secondary);border-radius:var(--radius-lg);padding:16px 18px;background:var(--bg-cream);}
+.cost-header{margin-bottom:14px;}
+.cost-title{font-size:0.88em;font-weight:500;color:var(--text-primary);display:flex;align-items:center;gap:7px;margin-bottom:4px;}
+.cost-title i{color:var(--text-secondary);}
+.cost-subtitle{font-size:0.72em;color:var(--text-tertiary);line-height:1.6;}
+.cost-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.cost-table{width:100%;border-collapse:collapse;font-size:0.72em;}
+.cost-table thead tr{background:#ddd8c9;border-bottom:2px solid #c8c0ad;}
+.cost-table th{padding:6px 8px;text-align:right;font-weight:600;color:var(--text-primary);white-space:nowrap;}
+.cost-table th:first-child{text-align:center;}
+.cost-table td{padding:5px 8px;text-align:right;color:var(--text-primary);border-bottom:1px solid #e4dfd3;white-space:nowrap;}
+.cost-table td:first-child{text-align:center;font-weight:600;color:var(--text-secondary);}
+.cost-table tbody tr:hover{background:#e8e2d6;}
+.cost-table .age-milestone td:first-child{color:#7F77DD;font-weight:700;}
+.cost-table .age-milestone{background:#ede8de;}
+.col-total{font-weight:700;color:#2a6496 !important;}
+.col-cum{color:#5a5a5a !important;}
+.no-prem{color:#bbb !important;font-weight:400 !important;}
+.cost-foot td{background:#ddd8c9;font-weight:700;padding:7px 8px;border-top:2px solid #c8c0ad;}
+.cost-note{font-size:0.68em;color:var(--text-tertiary);line-height:1.6;margin-top:10px;}
+
+/* 醫療雙十字 */
+.cross-section{margin-top:1.75rem;border:1px solid var(--border-secondary);border-radius:var(--radius-lg);padding:20px 18px 16px;background:var(--bg-cream);}
+.cross-title{font-size:0.88em;font-weight:500;color:var(--text-primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+.cross-title i{color:var(--text-secondary);}
+/* 雙十字：5-row × 3-col grid，三圓同一水平基準 */
+/* 關鍵尺寸：badge 76px (半徑 38) · line 70px · 箭頭三角 10px (半徑 5) */
+/* badge 中心距欄左緣／右緣 = 38 + 線 70 + 三角寬 8 = 116px */
+.cross-diagram{
+  display:grid;
+  grid-template-columns:minmax(280px,400px) auto minmax(240px,320px);
+  grid-template-rows:auto auto auto auto auto;
+  align-items:stretch;
+  gap:0;
+  margin:0 auto;
+  width:fit-content;
+  max-width:100%;
+}
+/* row 定位 */
+.cd-top-l   {grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-end;padding-bottom:6px;}
+.cd-top-r   {grid-column:3;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;padding-bottom:6px;}
+.cd-arr-up-l{grid-column:1;grid-row:2;display:flex;flex-direction:column;align-items:flex-end;padding-right:111px;}
+.cd-arr-up-r{grid-column:3;grid-row:2;display:flex;flex-direction:column;align-items:flex-start;padding-left:111px;}
+.cd-mid-l   {grid-column:1;grid-row:3;display:flex;align-items:center;justify-content:flex-end;}
+.cd-core    {grid-column:2;grid-row:3;display:flex;align-items:center;}
+.cd-mid-r   {grid-column:3;grid-row:3;display:flex;align-items:center;justify-content:flex-start;}
+.cd-arr-dn-l{grid-column:1;grid-row:4;display:flex;flex-direction:column;align-items:flex-end;padding-right:111px;}
+.cd-arr-dn-r{grid-column:3;grid-row:4;display:flex;flex-direction:column;align-items:flex-start;padding-left:111px;}
+.cd-bot-l   {grid-column:1;grid-row:5;display:flex;flex-direction:column;align-items:flex-end;padding-top:6px;}
+.cd-bot-r   {grid-column:3;grid-row:5;display:flex;flex-direction:column;align-items:flex-start;padding-top:6px;}
+/* 中間行：水平線＋節點圓＋箭頭，三件一起對齊圓心 */
+.cd-mid-l,.cd-mid-r{gap:0;}
+/* 水平線（固定寬度，讓 badge 位置穩定）*/
+.cross-h-line-l{width:70px;height:2px;background:linear-gradient(to left,#c8c0ad,#d4537e);flex-shrink:0;}
+.cross-h-line-r{width:70px;height:2px;background:linear-gradient(to right,#c8c0ad,#5a9e3a);flex-shrink:0;}
+/* 箭頭三角 */
+.cross-arr-l{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:8px solid #d4537e;flex-shrink:0;}
+.cross-arr-r{width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid #5a9e3a;flex-shrink:0;}
+/* 中心壽險圓 */
+.cross-core-circle{width:88px;height:88px;border-radius:50%;background:#ECE7D8;border:2px solid #c8c0ad;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0;}
+.cross-core-label{font-size:0.62em;font-weight:600;color:#56544f;line-height:1.3;}
+.cross-core-amt{font-size:0.72em;font-weight:700;color:#1f1e1c;margin-top:2px;}
+/* 側邊節點圓 */
+.cross-node-circle{width:76px;height:76px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;flex-shrink:0;}
+.cross-node-green{background:rgba(90,158,58,0.13);border:2px solid rgba(90,158,58,0.45);}
+.cross-node-pink {background:rgba(212,83,126,0.12);border:2px solid rgba(212,83,126,0.40);}
+.cross-node-label{font-size:0.65em;font-weight:700;line-height:1.25;}
+.cross-node-green .cross-node-label{color:#3a7a10;}
+.cross-node-pink  .cross-node-label{color:#a0304e;}
+.cross-node-sub{font-size:0.55em;color:var(--text-tertiary);margin-top:1px;}
+/* 垂直連接線 */
+.cross-v-line{width:2px;background:#c8c0ad;margin:0 auto;}
+.cross-arr-u::before{content:'';display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:7px solid #aaa;margin:0 auto;}
+.cross-arr-d::after {content:'';display:block;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:7px solid #aaa;margin:0 auto;}
+/* 保障卡片 */
+.cross-card{background:var(--bg-primary);border:1px solid var(--border-tertiary);border-radius:8px;padding:9px 11px;width:100%;font-size:0.70em;line-height:1.5;}
+.cross-card-title{font-weight:600;font-size:0.9em;margin-bottom:5px;}
+.cross-card-row{display:flex;justify-content:space-between;align-items:baseline;gap:6px;padding:2px 0;border-bottom:1px solid var(--border-tertiary);}
+.cross-card-row:last-child{border-bottom:none;}
+.cross-card-name{color:var(--text-secondary);flex:1;}
+.cross-card-val{font-weight:600;color:var(--text-primary);white-space:nowrap;}
+.cross-card-val.green{color:#3a7a10;}
+.cross-card-val.pink{color:#a0304e;}
+.cross-note{font-size:0.68em;color:var(--text-tertiary);line-height:1.6;margin-top:12px;}
+
+@media print{
+  @page{size:A4;margin:16mm 14mm;}
+  body{background:#fff;}
+  .wrap{max-width:none;font-size:11pt;padding:0;}
+  .print-bar{display:none;}
+  .premium-detail{display:flex !important;}
+  .product-card,.section,.premium-section,.summary-section{break-inside:avoid;}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="doc-label">保障規劃建議書</div>
+        <div class="client-name">Lily 小姐</div>
+      </div>
+      <div class="hdate">2026.10.25</div>
+    </div>
+    <div class="header-divider"></div>
+  </div>
+
+  <!-- 保費區 -->
+  <div class="premium-section">
+    <div class="premium-header">
+      <div class="premium-title">年繳保費（點擊展開理賠內容）</div>
+      <div class="premium-total-inline">
+        <span class="premium-total-label">年繳合計</span>
+        <span class="premium-total-amt">NT$ 18,429</span>
+      </div>
+    </div>
+
+    <!-- 壽險（主約） -->
+    <div class="pgroup pg-blue">
+      <span class="pgroup-label">壽險（主約）</span>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">XWS5 新平準終身壽險<span class="premium-tag">20年</span></span>
+          <span class="premium-amt">NT$ 990</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">身故／喪葬</span><span class="d-val">50,000 元</span></div>
+          <div class="d-row"><span class="d-label">完全失能</span><span class="d-val">50,000 元</span></div>
+          <div class="d-row"><span class="d-label">老年住院提前</span><span class="d-val">150 元／日（69 歲起）</span></div>
+          <div class="d-row"><span class="d-label">二至六級失能</span><span class="d-val">豁免本約續期保費</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 重大傷病 -->
+    <div class="pgroup pg-purple">
+      <span class="pgroup-label">重大傷病／疾病</span>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">SDL 溢卡安心重大傷病一年定期<span class="premium-tag">附約</span></span>
+          <span class="premium-amt">NT$ 230</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">重大傷病</span><span class="d-val">第1年 50,000／第2年起 <span class="hl-y">500,000 元</span></span></div>
+          <div class="d-row"><span class="d-label">特定重大傷病</span><span class="d-val">100,000 元</span></div>
+          <div class="d-row"><span class="d-label">特定重大疾病</span><span class="d-val">500,000 元</span></div>
+          <div class="d-row"><span class="d-label">特定傷病</span><span class="d-val">500,000 元</span></div>
+        </div>
+      </details>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">UCR 醫樣安心重大疾病一年定期<span class="premium-tag">附約</span></span>
+          <span class="premium-amt">NT$ 360</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">重大疾病</span><span class="d-val"><span class="hl-y">1,000,000 元</span>（心肌梗塞重度、冠狀動脈繞道手術等）</span></div>
+          <div class="d-row"><span class="d-label">首年癌症（重度）</span><span class="d-val">100,000 元</span></div>
+          <div class="d-row"><span class="d-label">特定傷病</span><span class="d-val">1,000,000 元</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 住院醫療 -->
+    <div class="pgroup pg-pink">
+      <span class="pgroup-label">住院醫療</span>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">HSV1 佳實在一年期住院醫療<span class="premium-tag">附約 · 實支</span></span>
+          <span class="premium-amt">NT$ 3,070</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">每日病房費</span><span class="d-val">實支 1,000 元／日（加護 2,000）</span></div>
+          <div class="d-row"><span class="d-label">住院醫療雜費</span><span class="d-val">實支上限 100,000 元／次（每次總限額 150,000）</span></div>
+          <div class="d-row"><span class="d-label">住院手術</span><span class="d-val">實支上限 40,000 元／次 × 手術比率</span></div>
+          <div class="d-row"><span class="d-label">門診手術</span><span class="d-val">實支上限 15,000 元／次（最高 6 次）</span></div>
+          <div class="d-row"><span class="d-label">特定處置</span><span class="d-val">實支上限 7,500 元／次（最高 6 次）</span></div>
+          <div class="d-row"><span class="d-label">住院日額（擇一）</span><span class="d-val">日額 1,000 元／日，加護 2,000 元／日</span></div>
+          <div class="d-row"><span class="d-label">每年限額</span><span class="d-val">750,000 元</span></div>
+        </div>
+      </details>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">HSY1 全鑫一年期住院醫療<span class="premium-tag">附約 · 實支</span></span>
+          <span class="premium-amt">NT$ 3,694</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">每日病房費</span><span class="d-val">實支，自負額 1,000 元，上限 <span class="hl-y">3,000 元／日</span></span></div>
+          <div class="d-row"><span class="d-label">住院醫療暨手術費</span><span class="d-val">自負額 100,000 元，上限 <span class="hl-y">300,000 元／次</span></span></div>
+          <div class="d-row"><span class="d-label">門診手術</span><span class="d-val">自負額 15,000 元，上限 25,000 元／次（最高 6 次）</span></div>
+          <div class="d-row"><span class="d-label">特定處置</span><span class="d-val">自負額 7,500 元，上限 12,500 元／次（最高 6 次）</span></div>
+          <div class="d-row"><span class="d-label">每年限額</span><span class="d-val">750,000 元</span></div>
+        </div>
+      </details>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">HKR5 日安心住院醫療定額<span class="premium-tag">附約 · 定額</span></span>
+          <span class="premium-amt">NT$ 6,770</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">住院每日額度</span><span class="d-val">日額 <span class="hl-y">1,000</span> ＋ 看護 <span class="hl-y">500</span> ＋ 出院療養 500（元／日）</span></div>
+          <div class="d-row"><span class="d-label">加護病房</span><span class="d-val">加護 2,000 ＋ 燒燙傷中心 3,000（元／日）</span></div>
+          <div class="d-row"><span class="d-label">住院手術</span><span class="d-val">手術 30,000 ＋ 看護 5,000（<span class="hl-y">合計 35,000 元／次</span>）× 比率</span></div>
+          <div class="d-row"><span class="d-label">特定重大疾病</span><span class="d-val">100,000 元／次</span></div>
+          <div class="d-row"><span class="d-label">醫療保險金上限</span><span class="d-val">住院日額 3,000 倍為限</span></div>
+        </div>
+      </details>
+    </div>
+
+    <!-- 意外 -->
+    <div class="pgroup pg-green">
+      <span class="pgroup-label">意外</span>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">ADG 享安寶意外傷害暨兒童傷害失能<span class="premium-tag">附約 · 身故</span></span>
+          <span class="premium-amt">NT$ 320</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">意外身故</span><span class="d-val">一般 100 萬（大眾運輸 200 萬）</span></div>
+          <div class="d-row"><span class="d-label">意外失能</span><span class="d-val">100 萬 × 失能給付比例</span></div>
+          <div class="d-row"><span class="d-label">重大燒燙傷</span><span class="d-val">400,000 或 100,000 元</span></div>
+        </div>
+      </details>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">ADM 安鑫護意外傷害住院醫療<span class="premium-tag">附約 · 住院</span></span>
+          <span class="premium-amt">NT$ 1,060</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">意外住院日額</span><span class="d-val"><span class="hl-y">2,000 元</span>／日，最高 90 天</span></div>
+          <div class="d-row"><span class="d-label">骨折慰問金</span><span class="d-val">未住院 1,000 元／日 × 骨折別日數</span></div>
+          <div class="d-row"><span class="d-label">意外門診手術</span><span class="d-val">2,000 元／次</span></div>
+        </div>
+      </details>
+      <details class="premium-item">
+        <summary>
+          <span class="premium-name">TMR 享安寶意外傷害醫療<span class="premium-tag">附加條款 · 實支</span></span>
+          <span class="premium-amt">NT$ 1,935</span>
+          <span class="chev"><i class="ti ti-chevron-down"></i></span>
+        </summary>
+        <div class="premium-detail">
+          <div class="d-row"><span class="d-label">意外醫療費用</span><span class="d-val"><span class="hl-y">實支上限 100,000 元／次</span>（加護中心 150,000）</span></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="premium-legend">
+      <div class="legend-item"><span class="legend-dot ld-purple"></span>重大傷病／疾病</div>
+      <div class="legend-item"><span class="legend-dot ld-pink"></span>住院醫療</div>
+      <div class="legend-item"><span class="legend-dot ld-green"></span>意外</div>
+      <div class="legend-item"><span class="legend-dot ld-blue"></span>壽險</div>
+    </div>
+    <div class="premium-sub">保費為試算參考值（試算日 民國115/10/25），實際費率依核保結果調整。</div>
+  </div>
+
+  <!-- 醫療前中後區 -->
+  <div class="timeline">
+
+    <!-- 醫療前（一次金） -->
+    <div class="section sec-before">
+      <div class="section-header">
+        <div class="node"><i class="ti ti-coin"></i></div>
+        <span class="phase-tag">醫療前（一次金）</span>
+        <span class="phase-title">確診即給付，不限用途</span>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">SDL 溢卡安心重大傷病附約</div><div class="product-badge">重大傷病</div></div>
+            <div class="product-headline">保額 50 萬，涵蓋重大傷病、特定重大傷病、特定重大疾病、特定傷病</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">重大傷病保險金</span></span><span class="benefit-val">第1年 <span class="hl">50,000</span>／第2年起 <span class="hl">500,000</span></span></div>
+              <div class="benefit-row"><span class="benefit-label">特定重大傷病</span><span class="benefit-val"><span class="hl">100,000 元</span></span></div>
+              <div class="benefit-row"><span class="benefit-label">特定重大疾病</span><span class="benefit-val"><span class="hl">500,000 元</span>（心肌梗塞重度等）</span></div>
+              <div class="benefit-row"><span class="benefit-label">特定傷病</span><span class="benefit-val"><span class="hl">500,000 元</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">UCR 醫樣安心重大疾病附約</div><div class="product-badge">重大疾病</div></div>
+            <div class="product-headline">保額 100 萬，涵蓋急性心肌梗塞重度、冠狀動脈繞道手術等重大疾病</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">重大疾病保險金</span></span><span class="benefit-val"><span class="hl">1,000,000 元</span>（非首年癌症重度）</span></div>
+              <div class="benefit-row"><span class="benefit-label">首年癌症（重度）</span><span class="benefit-val">確診當年度保費的 <span class="hl">10%</span>（約 100,000 元）</span></div>
+              <div class="benefit-row"><span class="benefit-label">特定傷病</span><span class="benefit-val"><span class="hl">1,000,000 元</span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 醫療中 -->
+    <div class="section sec-mid">
+      <div class="section-header">
+        <div class="node"><i class="ti ti-building-hospital"></i></div>
+        <span class="phase-tag">醫療中</span>
+        <span class="phase-title">醫療實支補貼健保不賠之收據、醫療定額補貼住院期間日常生活成本</span>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top">
+              <div class="product-name" style="line-height:1.6;">HSV1 佳實在一年期住院醫療附約<br><span style="font-weight:400;color:var(--text-secondary);">＋</span><br>HSY1 全鑫一年期住院醫療附約</div>
+              <div class="product-badge">醫療實支</div>
+            </div>
+            <div class="product-headline">雙實支疊加，以 HSY1 上限為保障額度，自費醫材超額全額補足</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">① 每日病房費用</span></span><span class="benefit-val">實支上限 <span class="hl">3,000 元／日</span>（加護 <span class="hl">4,000 元／日</span>）</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">② 住院醫療暨手術費</span></span><span class="benefit-val">實支上限 <span class="hl">300,000 元／次</span></span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">③ 門診手術</span></span><span class="benefit-val">實支上限 <span class="hl">25,000 元／次</span>（最高 6 次）</span></div>
+              <div class="benefit-row"><span class="benefit-label">④ 特定處置</span><span class="benefit-val">實支上限 <span class="hl">12,500 元／次</span>（最高 6 次）</span></div>
+              <div class="benefit-row"><span class="benefit-label">⑤ 每年保險金上限</span><span class="benefit-val">各 <span class="hl">750,000 元</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">HKR5 日安心住院醫療定額附約</div><div class="product-badge">醫療定額</div></div>
+            <div class="product-headline">住院期間日額疊加給付，減輕家庭日常收入中斷之損失</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">① 住院每日額度</span></span><span class="benefit-val">日額 <span class="hl">1,000</span> ＋ 看護 <span class="hl">500</span> ＋ 出院療養 <span class="hl">500</span>（元／日）</span></div>
+              <div class="benefit-row"><span class="benefit-label">② 加護／燒燙傷</span><span class="benefit-val">加護 <span class="hl">2,000</span>、燒燙傷中心 <span class="hl">3,000</span>（元／日）</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">③ 住院手術</span></span><span class="benefit-val">手術 <span class="hl">30,000</span> ＋ 手術看護 <span class="hl">5,000</span>（合計 <span class="hl">35,000 元／次</span>）× 比率</span></div>
+              <div class="benefit-row"><span class="benefit-label">④ 特定重大疾病</span><span class="benefit-val"><span class="hl">100,000 元</span>／次（重大器官移植）</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 意外險 -->
+    <div class="section sec-acc">
+      <div class="section-header">
+        <div class="node"><i class="ti ti-bolt"></i></div>
+        <span class="phase-tag">意外險</span>
+        <span class="phase-title">突發事故，身故、住院、實支三層保障</span>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">ADG 享安寶意外傷害暨兒童傷害失能附約</div><div class="product-badge">意外身故／失能</div></div>
+            <div class="product-headline">意外身故失能保障，搭乘大眾運輸加倍，另含重大燒燙傷</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label">意外身故</span><span class="benefit-val">一般 <span class="hl">100 萬</span>（大眾運輸 <span class="hl">200 萬</span>）</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">意外失能</span></span><span class="benefit-val"><span class="hl">100 萬</span> × 失能給付比例</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">重大燒燙傷</span></span><span class="benefit-val"><span class="hl">400,000 或 100,000 元</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">ADM 安鑫護意外傷害住院醫療附約</div><div class="product-badge">意外住院</div></div>
+            <div class="product-headline">意外住院日額，含骨折慰問金（未住院亦可領）</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">意外住院日額</span></span><span class="benefit-val"><span class="hl">2,000 元／日</span>，最高 90 天</span></div>
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">骨折慰問金</span></span><span class="benefit-val">未住院 <span class="hl">1,000 元／日</span> × 骨折別日數</span></div>
+              <div class="benefit-row"><span class="benefit-label">意外門診手術</span><span class="benefit-val"><span class="hl">2,000 元／次</span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">TMR 享安寶意外傷害醫療附加條款</div><div class="product-badge">意外實支</div></div>
+            <div class="product-headline">意外就醫實支實付，加護／燒燙傷中心提高 1.5 倍</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label"><span class="hl-y">意外醫療費用</span></span><span class="benefit-val">實支上限 <span class="hl">100,000 元／次</span>（加護中心 <span class="hl">150,000</span>）</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 壽險 -->
+    <div class="section sec-life">
+      <div class="section-header">
+        <div class="node"><i class="ti ti-users"></i></div>
+        <span class="phase-tag">壽險（身故理賠）</span>
+        <span class="phase-title">守護家人，財務缺口不轉嫁</span>
+      </div>
+      <div class="branch-wrap">
+        <div class="branch-card">
+          <div class="product-card">
+            <div class="product-top"><div class="product-name">XWS5 新平準終身壽險（主約）</div><div class="product-badge">終身壽險</div></div>
+            <div class="product-headline">終身壽險保障，20 年繳，另含老年住院提前給付與失能豁免保費</div>
+            <div class="benefits">
+              <div class="benefit-row"><span class="benefit-label">身故／喪葬</span><span class="benefit-val"><span class="hl">NT$ 50,000</span></span></div>
+              <div class="benefit-row"><span class="benefit-label">完全失能</span><span class="benefit-val"><span class="hl">NT$ 50,000</span></span></div>
+              <div class="benefit-row"><span class="benefit-label">老年住院提前給付</span><span class="benefit-val"><span class="hl">150 元／日</span>（69 歲起）</span></div>
+              <div class="benefit-row"><span class="benefit-label">二至六級失能</span><span class="benefit-val">豁免本約續期保費</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /醫療前中後區 -->
+
+  <!-- 保障簡表區 -->
+  <div class="summary-section">
+    <div class="summary-title"><i class="ti ti-list-check"></i> 簡易保障說明</div>
+    <div class="summary-list">
+      <div class="summary-item"><span class="summary-dot ld-purple"></span><span class="summary-text">重大傷病卡（癌症等 300 餘項目）</span><span class="summary-amt">50 萬</span></div>
+      <div class="summary-item"><span class="summary-dot ld-purple"></span><span class="summary-text">重大疾病（含癌症二期，心肌梗塞重度等）</span><span class="summary-amt">100 萬</span></div>
+      <div class="summary-item"><span class="summary-dot ld-pink"></span><span class="summary-text">一般住院日額（HSV1+HSY1+HKR5）</span><span class="summary-amt">5,000 / 日</span></div>
+      <div class="summary-item"><span class="summary-dot ld-green"></span><span class="summary-text">意外住院日額（HSV1+HSY1+HKR5+ADM）</span><span class="summary-amt">7,000 / 日</span></div>
+      <div class="summary-item"><span class="summary-dot ld-pink"></span><span class="summary-text">癌症住院日額（HSV1+HSY1+HKR5）</span><span class="summary-amt">5,000 / 日</span></div>
+      <div class="summary-item"><span class="summary-dot ld-pink"></span><span class="summary-text">住院期間自費額度（HSV1+HSY1）</span><span class="summary-amt">30 萬 / 次</span></div>
+      <div class="summary-item"><span class="summary-dot ld-green"></span><span class="summary-text">意外實支實付（門診可）</span><span class="summary-amt">10 萬額度</span></div>
+    </div>
+  </div>
+
+  <!-- 50年保費試算表 -->
+  <div class="cost-section">
+    <div class="cost-header">
+      <div class="cost-title"><i class="ti ti-calculator"></i> 50 年保費試算</div>
+      <div class="cost-subtitle">女性，職類 1 類，依各商品費率表逐年試算（ADG／SDL／UCR／HSV1／HSY1 依年齡費率調整；ADM／TMR／HKR5 固定費率；XWS5 繳費 20 年）</div>
+    </div>
+    <div class="cost-table-wrap">
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>年齡</th><th>XWS5</th><th>ADG</th><th>ADM</th><th>TMR</th><th>SDL</th><th>HKR5</th><th>HSV1</th><th>HSY1</th><th>UCR</th><th class="col-total">年繳合計</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr><td>0</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>230</td><td>6,770</td><td>3,070</td><td>3,694</td><td>360</td><td class="col-total">18,429</td></tr>
+<tr><td>1</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>2,045</td><td>6,770</td><td>3,070</td><td>3,694</td><td>600</td><td class="col-total">20,484</td></tr>
+<tr><td>2</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,540</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,879</td></tr>
+<tr><td>3</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,844</td></tr>
+<tr><td>4</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,490</td><td>6,770</td><td>3,070</td><td>3,694</td><td>500</td><td class="col-total">19,829</td></tr>
+<tr><td>5</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>1,045</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td><td class="col-total">18,129</td></tr>
+<tr><td>6</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>900</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,884</td></tr>
+<tr><td>7</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>755</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,739</td></tr>
+<tr><td>8</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>585</td><td>6,770</td><td>2,610</td><td>2,899</td><td>400</td><td class="col-total">17,569</td></tr>
+<tr><td>9</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>605</td><td>6,770</td><td>2,610</td><td>2,899</td><td>500</td><td class="col-total">17,689</td></tr>
+<tr><td>10</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>620</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,255</td></tr>
+<tr><td>11</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>680</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,315</td></tr>
+<tr><td>12</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>665</td><td>6,770</td><td>2,970</td><td>3,090</td><td>500</td><td class="col-total">18,300</td></tr>
+<tr><td>13</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>730</td><td>6,770</td><td>2,970</td><td>3,090</td><td>600</td><td class="col-total">18,465</td></tr>
+<tr><td>14</td><td>990</td><td>320</td><td>1,060</td><td>1,935</td><td>850</td><td>6,770</td><td>2,970</td><td>3,090</td><td>700</td><td class="col-total">18,685</td></tr>
+<tr class="age-milestone"><td>15</td><td>990</td><td>650</td><td>1,060</td><td>1,935</td><td>995</td><td>6,770</td><td>3,080</td><td>3,210</td><td>800</td><td class="col-total">19,490</td></tr>
+<tr><td>16</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,175</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,100</td></tr>
+<tr><td>17</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,295</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,220</td></tr>
+<tr><td>18</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,505</td><td>6,770</td><td>3,080</td><td>3,210</td><td>900</td><td class="col-total">20,430</td></tr>
+<tr><td>19</td><td>990</td><td>980</td><td>1,060</td><td>1,935</td><td>1,695</td><td>6,770</td><td>3,080</td><td>3,210</td><td>1,000</td><td class="col-total">20,720</td></tr>
+<tr class="age-milestone"><td>20</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,565</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">19,975</td></tr>
+<tr><td>21</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,575</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">19,985</td></tr>
+<tr><td>22</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,635</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,000</td><td class="col-total">20,045</td></tr>
+<tr><td>23</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,675</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,100</td><td class="col-total">20,185</td></tr>
+<tr><td>24</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,730</td><td>6,770</td><td>3,450</td><td>3,215</td><td>1,300</td><td class="col-total">20,440</td></tr>
+<tr><td>25</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,885</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,500</td><td class="col-total">21,350</td></tr>
+<tr><td>26</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>1,915</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,600</td><td class="col-total">21,480</td></tr>
+<tr><td>27</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,035</td><td>6,770</td><td>4,000</td><td>3,220</td><td>1,800</td><td class="col-total">21,800</td></tr>
+<tr><td>28</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,200</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,000</td><td class="col-total">22,165</td></tr>
+<tr><td>29</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,495</td><td>6,770</td><td>4,000</td><td>3,220</td><td>2,300</td><td class="col-total">22,760</td></tr>
+<tr class="age-milestone"><td>30</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,780</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,500</td><td class="col-total">28,170</td></tr>
+<tr><td>31</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>2,975</td><td>6,770</td><td>6,500</td><td>5,645</td><td>2,800</td><td class="col-total">28,665</td></tr>
+<tr><td>32</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,260</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,000</td><td class="col-total">29,150</td></tr>
+<tr><td>33</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,315</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,400</td><td class="col-total">29,605</td></tr>
+<tr><td>34</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,480</td><td>6,770</td><td>6,500</td><td>5,645</td><td>3,700</td><td class="col-total">30,070</td></tr>
+<tr><td>35</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,765</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,000</td><td class="col-total">31,518</td></tr>
+<tr><td>36</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>3,940</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,300</td><td class="col-total">31,993</td></tr>
+<tr><td>37</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,185</td><td>6,770</td><td>7,200</td><td>5,808</td><td>4,600</td><td class="col-total">32,538</td></tr>
+<tr><td>38</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>4,755</td><td>6,770</td><td>7,200</td><td>5,808</td><td>5,300</td><td class="col-total">33,808</td></tr>
+<tr><td>39</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,290</td><td>6,770</td><td>7,200</td><td>5,808</td><td>6,000</td><td class="col-total">35,043</td></tr>
+<tr class="age-milestone"><td>40</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>5,855</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,400</td><td class="col-total">36,776</td></tr>
+<tr><td>41</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>6,410</td><td>6,770</td><td>7,150</td><td>6,626</td><td>6,800</td><td class="col-total">37,731</td></tr>
+<tr><td>42</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,005</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,300</td><td class="col-total">38,826</td></tr>
+<tr><td>43</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,395</td><td>6,770</td><td>7,150</td><td>6,626</td><td>7,900</td><td class="col-total">39,816</td></tr>
+<tr><td>44</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>7,845</td><td>6,770</td><td>7,150</td><td>6,626</td><td>8,500</td><td class="col-total">40,866</td></tr>
+<tr class="age-milestone"><td>45</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,290</td><td>6,770</td><td>8,050</td><td>7,455</td><td>9,400</td><td class="col-total">43,940</td></tr>
+<tr><td>46</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>8,600</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,000</td><td class="col-total">44,850</td></tr>
+<tr><td>47</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,180</td><td>6,770</td><td>8,050</td><td>7,455</td><td>10,800</td><td class="col-total">46,230</td></tr>
+<tr><td>48</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>9,585</td><td>6,770</td><td>8,050</td><td>7,455</td><td>11,500</td><td class="col-total">47,335</td></tr>
+<tr><td>49</td><td class="no-prem">—</td><td>980</td><td>1,060</td><td>1,935</td><td>10,035</td><td>6,770</td><td>8,050</td><td>7,455</td><td>12,100</td><td class="col-total">48,385</td></tr>
+        </tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+    <div class="cost-note">※ SDL 0 歲為首年費率，1 歲起依續保費率調整；UCR 同。ADG 0–14 歲費率 3.2，15 歲 6.5，16 歲起 9.8（每萬元）。HKR5、ADM、TMR 為固定費率。XWS5 繳費期 20 年（0–19 歲），20 歲後停繳。本試算不含未來費率調整，僅供參考。</div>
+  </div>
+
+  <div class="print-bar">
+    <button class="print-btn" onclick="window.print()"><i class="ti ti-printer"></i> 列印 / 另存 PDF</button>
+  </div>
+  <div class="footer">
+    <div class="footer-note">本建議書非保險契約，詳細商品內容及變更，以投保當時保單條款內容及本公司核保、保全作業規定為準。</div>
+  </div>
+</div>
+</body>
+</html>
